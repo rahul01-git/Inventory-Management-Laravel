@@ -105,7 +105,11 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::findOrFail($id);
         $page_title = 'Purchases Edit';
-        return view('purchase.edit',compact('purchase','page_title'));
+        $suppliers = Supplier::where('status',1)->get();
+        $units = Unit::all();
+        $categories = Category::all();
+        $products = Product::all();
+        return view('purchase.edit',compact('purchase','page_title','suppliers','categories','units','products'));
     }
 
     /**
@@ -117,7 +121,45 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $purchase = Purchase::findOrFail($id);
+
+        $request->validate([
+            'purchase_no' => 'required',
+            'supplier_id' => 'required',
+            'paid_amount' => 'required',
+            'total_amount' => 'required',
+            'category_id' => 'required',
+            'product_id' => 'required',
+            'quantity' => 'required',
+            'unit_price' => 'required',
+        ]);
+
+        $purchase->update([
+            'purchase_no' => $request->purchase_no,
+            'supplier_id' => $request->supplier_id,
+            'paid_amount' => $request->paid_amount,
+            'total_amount' => $request->total_amount,
+            'due_amount' => (int)$request->total_amount-(int)$request->paid_amount,
+        ]);
+
+        foreach ($purchase->purchaseMeta as $item) {
+            $item->delete();
+        }
+
+        for($i=0; $i<count($request->category_id); $i++){
+            PurchaseMeta::create([
+                'purchase_id' => $purchase->id,
+                'category_id' => $request->category_id[$i],
+                'product_id' => $request->product_id[$i],
+                'quantity' => $request->quantity[$i],
+                'unit_price' => $request->unit_price[$i],
+                'unit_id' => $request->unit_id[$i],
+            ]);
+
+        }
+
+        return redirect()-> route('purchase.index');
+
     }
 
     /**
@@ -128,7 +170,14 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $purchase = Purchase::findOrFail($id);
+
+        foreach ($purchase->purchaseMeta as $item) {
+            $item->delete();
+        }
+
+        $purchase->delete();
+        return redirect()->route('purchase.index');
     }
 
     public function uniqueNumber(){

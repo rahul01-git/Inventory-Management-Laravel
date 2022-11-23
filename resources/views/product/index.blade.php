@@ -85,7 +85,7 @@
 
         $('.delete').on('click',function(){
             const id = this.id;
-            $('#deleteModal').attr('action','{{route("product.destroy","")}}'+'/'+id);
+            $('#deleteModal').attr('action','{{route("purchase.destroy","")}}'+'/'+id);
         });
     </script>
 @endsection
