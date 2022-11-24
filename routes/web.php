@@ -27,10 +27,9 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/unit', App\Http\Controllers\UnitController::class,['names' => 'unit']);
     Route::resource('/purchase', App\Http\Controllers\PurchaseController::class,['names' => 'purchase']);
     Route::get('/category/product/{id}',[App\Http\Controllers\PurchaseController::class,'getProduct'])->name('product.get');
+    Route::resource('/invoice', App\Http\Controllers\InvoiceController::class,['names' => 'invoice']);
 });
 
 
 
-// Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -54,6 +54,13 @@
                     <li class="{{request()->routeIs('purchase.index') ? 'active' : ''}}"><a class="nav-link" href="{{route('purchase.index')}}">Purchase list</a></li>
                 </ul>
             </li>
+            <li class="dropdown {{request()->is('invoice/*') ||request()->is('invoice')  ? 'active' : ''}}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i><span>Invoice</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{request()->routeIs('invoice.create') ? 'active' : ''}}"><a class="nav-link" href="{{route('invoice.create')}}">New Invoice</a></li>
+                    <li class="{{request()->routeIs('invoice.index') ? 'active' : ''}}"><a class="nav-link" href="{{route('invoice.index')}}">Invoice list</a></li>
+                </ul>
+            </li>
             <li class="menu-header">Log Out</li>
             <li>
                 <a href="{{ route('logout') }}" class="nav-link"
