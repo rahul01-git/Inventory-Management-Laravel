@@ -55,10 +55,17 @@
                 </ul>
             </li>
             <li class="dropdown {{request()->is('invoice/*') ||request()->is('invoice')  ? 'active' : ''}}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i><span>Invoice</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-invoice"></i><span>Invoice</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{request()->routeIs('invoice.create') ? 'active' : ''}}"><a class="nav-link" href="{{route('invoice.create')}}">New Invoice</a></li>
                     <li class="{{request()->routeIs('invoice.index') ? 'active' : ''}}"><a class="nav-link" href="{{route('invoice.index')}}">Invoice list</a></li>
+                </ul>
+            </li>
+            <li class="dropdown {{request()->is('reports/*') ||request()->is('reports')  ? 'active' : ''}}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-tasks"></i><span>Report</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{request()->is('reports/invoice') ? 'active' : ''}}"><a class="nav-link" href="{{route('report','invoice')}}">Invoice Report</a></li>
+                    <li class="{{request()->is('reports/purchase') ? 'active' : ''}}"><a class="nav-link" href="{{route('report','purchase')}}">Purchase Report</a></li>
                 </ul>
             </li>
             <li class="menu-header">Log Out</li>
