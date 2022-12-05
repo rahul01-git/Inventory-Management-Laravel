@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Invoice;
+use App\Models\Product;
 use App\Models\Purchase;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,7 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $productCount = Product::all()->count();
+        $purchaseCount = Purchase::wheredate('created_at', Carbon::today())->sum('total_amount');
+        $invoiceCount = Invoice::wheredate('created_at', Carbon::today())->sum('total_amount');
+        $unpaidInvoices = Invoice::where('due_amount', '!=', 0)->get();
+        $unpaidPurchases = Purchase::where('due_amount', '!=', 0)->get();
+        return view('home',compact('productCount','purchaseCount','invoiceCount','unpaidInvoices','unpaidPurchases'));
     }
     public function report($type)
     {

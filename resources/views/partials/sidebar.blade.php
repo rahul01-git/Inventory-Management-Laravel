@@ -27,21 +27,21 @@
                 </ul>
             </li>
             <li class="dropdown {{request()->is('category/*') ||request()->is('category')  ? 'active' : ''}}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>categories</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-bars"></i><span>categories</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{request()->routeIs('category.create') ? 'active' : ''}}"><a class="nav-link" href="{{route('category.create')}}">Add categories</a></li>
                     <li class="{{request()->routeIs('category.index') ? 'active' : ''}}"><a class="nav-link" href="{{route('category.index')}}">All categories</a></li>
                 </ul>
             </li>
             <li class="dropdown {{request()->is('product/*') ||request()->is('product')  ? 'active' : ''}}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i><span>Products</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-box"></i><span>Products</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{request()->routeIs('product.create') ? 'active' : ''}}"><a class="nav-link" href="{{route('product.create')}}">Add Products</a></li>
                     <li class="{{request()->routeIs('product.index') ? 'active' : ''}}"><a class="nav-link" href="{{route('product.index')}}">All Products</a></li>
                 </ul>
             </li>
             <li class="dropdown {{request()->is('unit/*') ||request()->is('unit')  ? 'active' : ''}}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i><span>Unit</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-ruler"></i><span>Unit</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{request()->routeIs('unit.create') ? 'active' : ''}}"><a class="nav-link" href="{{route('unit.create')}}">Add Unit</a></li>
                     <li class="{{request()->routeIs('unit.index') ? 'active' : ''}}"><a class="nav-link" href="{{route('unit.index')}}">All Unit</a></li>
